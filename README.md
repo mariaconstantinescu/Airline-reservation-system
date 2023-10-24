@@ -1,5 +1,4 @@
 # Project-3
-Object-oriented programming
 The current application simulates an airline reservation system that allows users to manage reservations for an airplane. The system will incorporate multiple objects, including the airplane itself and the customers who will be booking seats on the plane.
 The main goal of the airline reservation system is to efficiently fill the available seats on the airplane while providing a seamless experience for the customers. To achieve this, we will implement two different classes of passengers: Business and Economy. The seats will have varying prices based on the class, with Business seats generally costing more than Economy seats.
 The system will support the creation of new customers, either through manual entry of customer details or automatic generation with attributes such as age and weight. Once customers are created, they will have the ability to choose and purchase specific seats on the plane. As a bonus feature, if a customer does not have enough money to afford their desired seat, the system will suggest lower-priced alternatives.
