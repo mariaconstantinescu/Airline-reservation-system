@@ -28,8 +28,9 @@ public:
         age = u_age;
         weight= u_weight;
     }
-    virtual string getSeatClass() = 0;
-    virtual double getPrice() = 0;
+    virtual string getSeatClass() = 0;  //This is a virtual function. The derived classes that inherit from the base class must provide their own implementation of this function. 
+//The purpose of this function is to retrieve the seat class of a passenger. It returns a string representing the class of the seat, such as "Business" or "Economy".
+    virtual double getPrice() = 0; //The purpose of this function is to retrieve the price of a seat. It returns a double value representing the price of the seat in the specific class.
     void printInfo() {
         cout << "Name: " << firstname << " " << lastname << endl;
         cout << "Age: " << age << endl;
@@ -39,7 +40,7 @@ public:
     }
 };
 
-class BusinessPassenger : public Passenger {
+class BusinessPassenger : public Passenger {  //derived class
 public:
     BusinessPassenger(string u_firstname, string u_lastname, int u_age, double u_weight) : Passenger(u_firstname, u_lastname, u_age, u_weight) {}
     string getSeatClass() {
@@ -50,7 +51,7 @@ public:
     }
 };
 
-class EconomyPassenger : public Passenger {
+class EconomyPassenger : public Passenger {  //derived clas
 public:
     EconomyPassenger(string u_firstname, string u_lastname, int u_age, double u_weight) : Passenger(u_firstname, u_lastname, u_age, u_weight) {}
     string getSeatClass() {
@@ -89,7 +90,7 @@ public:
         numEconomySeats = e;
     }
 
-    int isfull() {
+    int isfull() {        //This function checks if there are available seats in both the business and economy classes are fully occupied.
         int i, j = 0, k = 0;
         for (i = 0; i < numBusinessSeats; i++)
             if (v[i] == 0)
@@ -103,6 +104,10 @@ public:
             return 0;
     }
 
+//This function adds a passenger to the aircraft. It first checks if the aircraft is already full by calling the isfull() function. If the aircraft is full, it returns 0 to indicate that the passenger cannot be added. 
+//Otherwise, it checks the seat class of the passenger (p->getSeatClass()) and the availability of seats in the corresponding class. 
+//If there are available seats, it decreases the count of available seats (numBusinessSeats or numEconomySeats) and returns 1 to indicate successful addition of the passenger. 
+//If no suitable seat is available, it returns 0.
     int addPassenger(Passenger *p) {
         if (isfull() == 1) {
             return 0;
@@ -117,6 +122,9 @@ public:
             return 0;
     }
 
+//This function removes a passenger from the aircraft based on the provided seat number. It checks the seat class of the passenger (p->getSeatClass()) and if the seat number is less than or equal to numBusinessSeats, 
+//it indicates that the passenger was in the business class, and therefore, it increments the count of available business seats (numBusinessSeats++).
+//Otherwise, it assumes the passenger was in the economy class and increments the count of available economy seats (numEconomySeats++).
     void removePassenger(int seatNumber, Passenger *p) {
         if (p->getSeatClass() == "Business" && seatNumber <= numBusinessSeats)
             numBusinessSeats++;
@@ -125,6 +133,10 @@ public:
 
     }
 
+//This function searches for a passenger by their full name. It first iterates over the v array to search for a matching name in the business class passengers. 
+//If a match is found, it sets k = 1 to indicate that a match was found and prints the seat class and seat number of the passenger. If no match is found in the business class, 
+//it then iterates over the w array to search for a matching name in the economy class passengers.
+//If a match is found, it sets k = 1 and prints the seat class and seat number. If no match is found in either class, no output is produced.
     void searchPassengerByName(string name) {
         int i, k = 0;
         for (int i = 0; i < numBusinessSeats; i++) {
